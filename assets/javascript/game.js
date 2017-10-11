@@ -1,15 +1,34 @@
 // variables 
-var hangmanAnimation = "";
-var wins = 0;
-var losses = 0;
-var incorrectGuessesRemaining = 10;
-var lettersGuessed = 0;
-var hangmanFunction = document.getElementById("hangmanFunction");
-// var blankLines = "<p>_</p>" * return fighterSelection;
+
+// array of fighters
 var hangmanMMAFightersArray = ["ConorMcGregor", 
 								"AndersonSilva", "KhabibNurmagomedov", "DanielCormier", "DemetriousJohnson", "JimiManuwa"];
-var hangmanMMAFightersArrayLowerCase = hangmanMMAFightersArray.toLowerCase();
 
+// vars and innerHTML for wins
+var wins = 0;
+document.querySelector("#winsId").innerHTML = "<p>" + wins + "</p>";
+
+// vars and innerHTML for losses
+var losses = 0;
+document.querySelector("#lossesId").innerHTML = "<p>" + losses + "</p>";
+
+// vars and innerHTML for incorrectGuessesRemaining
+var incorrectGuessesRemaining = 10;
+document.querySelector("#incorrectGuessesRemainingId").innerHTML = "<p>" + incorrectGuessesRemaining + "</p>";
+
+// vars and innerHTML for letters guessed
+var lettersGuessed = 0;
+document.querySelector("#lettersGuessedId").innerHTML = "<p>" + lettersGuessed + "</p>";
+
+// var, innerHTML, and func to determing # of blankLines based on fighterNumber
+var blankLines = function blankLinesFunc() {
+					"_ ".repeat(hangmanMMAFightersArray[fighterNumber].length);
+					}
+document.querySelector("#blankLinesId").innerHTML = "<p>" + blankLines + "</p>";
+
+// var and func for determing fighterNumber
+var fighterNumber = [Math.floor(Math.random() * hangmanMMAFightersArray.length)];
+	
 // FUNCTIONS
 
 // func is run whenever the user presses a key, used to match user input, incorrectGuessesRemaining, lettersGuessed
@@ -19,8 +38,8 @@ document.onkeyup = function(event) {
     var userGuess = event.key;
     // func for matching user input with hangmanMMAFightersArray
 	for (i = 0; i < hangmanMMAFightersArray[fighter].length; i++) {
-		if (userGuess == hangmanMMAFightersArrayLowerCase[fighter][i]) {
-			// set a loop where every time userGuess == hangmanMMAFightersArrayLowerCase[fighter][i],
+		if (userGuess == hangmanMMAFightersArray[fighter][i]) {
+			// set a loop where every time userGuess == hangmanMMAFightersArray[fighter][i],
 			// input html for those positions in id="blankLines"
 			blankLines = userGuess;
 		// if userGuess is wrong, incorrectGuessesRemaining - 1 and input lettersGuessed as userGuess
@@ -31,32 +50,10 @@ document.onkeyup = function(event) {
 	}   
 }
 
-// func for wins, HELP with checking id blankLines for no letters left
-wins = function win() {
-	if (blankLines) {
-		wins++;
-	}
-}
-
-// func for losses which then changes resets the game
-losses = function loss() {
-	if (incorrectGuessesRemaining == 0) {
-		losses++;
-		changeFighter();
-	}
-}
-
-// func for determing fighter
-function changeFighter() {
-	var fighter = [Math.floor(Math.random() * hangmanMMAFightersArray.length)];
-	return fighter;
-}
-
 // func for making blank lines and spaces for fighter's name
 var blankLines = function blankLinesFunc() {
-	"_ ".repeat(hangmanMMAFightersArrayLowerCase[fighter].length);
+	"_ ".repeat(hangmanMMAFightersArray[fighter].length);
 	// enter result into id blankLines html
 }
 
 
-// return variables into html, use ids???
