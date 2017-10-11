@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/javascript" href="assets/javascript/game.js">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>	
+	<title>Hangman</title>	
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron jumbotron-fluid text-center bg-info text-white">
+		    <h1 class="display-3">Hangman</h1>
+		    <p class="lead ">MMA edition, no nicknames!</p>
+		</div>
+		<div class="row" id="row 1">
+			<div class="col-sm-8" id="hangmanAnimation">
+				<h2>Press any key to get started!</h2>
+				<h5>Wins:<span id="wins">___</span></h5>
+				<h5>Losses:<span id="losses">___</span></h5>
+				<h5>Number of Guesses Remaining:<span id="incorrectGuessesRemaining">___</span></h5>
+				<h5>Letters Already Guessed:<span id="lettersGuessed">___</span></h5>
+			</div>
+			<div class="col-sm-4" id="hangmanFunction">
+				<h5>Word: <span id="blankLines">_____________________________________________</span></h5>	
+			</div>
+		</div>
+		<footer class="row float-right" id="row2">
+			<p>© Copyright 2017 John Alexander Ferguson</p>
+		</footer>
+	</div>	
+</body>
+</html>
