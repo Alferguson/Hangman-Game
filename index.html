@@ -13,7 +13,7 @@
 	<div class="container-fluid">
 		<div class="jumbotron jumbotron-fluid text-center bg-info text-white">
 		    <h1 class="display-3">Hangman</h1>
-		    <p class="lead ">MMA edition, no nicknames!</p>
+		    <p class="lead ">MMA edition, no nicknames! Don't use same letters!</p>
 		</div>
 		<div class="row" id="row 1">
 			<div class="col-sm-8" id="hangmanAnimationId">
@@ -21,11 +21,12 @@
 				<h3 id="NaNInputId"></h3>
 				<h5>Wins:<span id="winsId">___</span></h5>
 				<h5>Losses:<span id="lossesId">___</span></h5>
-				<h5>Number of Guesses Remaining:<span id="incorrectGuessesRemainingId">___</span></h5>
-				<h5>Letters Already Guessed:<span id="lettersGuessedId">___</span></h5>
+				<h5>Number of Guesses Remaining:<span id="guessesRemainingId">___</span></h5>
+				<h5>Letters Already Guessed:<h5 id="lettersGuessedId">___</h5></h5>
 			</div>
 			<div class="col-sm-4" id="hangmanFunctionId">
 				<h5>Word: <span id="blankLinesId">_________________________________________</span></h5>	
+				<h5>The fighter after you win! <span id="resultWord"></span><h5>
 			</div>
 		</div>
 		<footer class="row float-right" id="row2">

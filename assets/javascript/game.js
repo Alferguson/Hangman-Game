@@ -1,128 +1,99 @@
 // variables 
+var guessesRemaining = 15;
+document.querySelector("#guessesRemainingId").innerHTML = "<p>" + guessesRemaining + "</p>";
 // array of fighters
-var incorrectGuessesRemaining = 10;
-document.querySelector("#incorrectGuessesRemainingId").innerHTML = "<p>" + incorrectGuessesRemaining + "</p>";
 var hangmanMMAFightersArray = ["conormcgregor", "andersonsilva", "khabibnurmagomedov"];
+// useful array for citing the above array with proper formating
+var hangmanMMAFightersArrUpp = ["Conor McGregor", "Anderson Silva", "Khabib Nurmagomedov"];
 var fighterNumber = [Math.floor(Math.random() * hangmanMMAFightersArray.length)];
-//splits word in array for userGuess check, should use lower case 
-// var hangmanMMAFightersArrayBlanks = hangmanMMAFightersArray[1].split("");
-
-// vars and innerHTML for wins
+// var and innerHTML for wins
 var wins = 0;
 document.querySelector("#winsId").innerHTML = "<p>" + wins + "</p>";
-
-// vars and innerHTML for losses
+// var and innerHTML for losses
 var losses = 0;
 document.querySelector("#lossesId").innerHTML = "<p>" + losses + "</p>";
-
-// win
-// if (hangmanMMAFightersArray[fighterNumber] = blankLinesArray.join("")) {
-// 	wins++;
-// 	resetFunc();
-// }
-
-// loss
-
-if (incorrectGuessesRemaining == 0) {
-	losses++;
-	resetFunc();
-};
-
-var lettersGuessed = [""];
+// array for letters guessed stored
+var lettersGuessed = [];
 document.querySelector("#lettersGuessedId").innerHTML = "<p>" + lettersGuessed + "</p>";
-// win where if the letters that replaced blank lines is equal to the fighter
-// if (remainingCorrectLetters == 0) {
-// 	wins++;
-// 	resetFunc();
-// };	
-// to make # of blanks
+// to make # of blanks according to words length
 var blankLinesArray = [];
 for (i = 0; i < hangmanMMAFightersArray[fighterNumber].length; i++) {
 	blankLinesArray[i]="_";
-};
+}
+// var for # of correct letters left
 var remainingCorrectLetters = hangmanMMAFightersArray[fighterNumber].length;
 
-// array for lettersGuessedId
-var lettersGuessed = [];
-
-// hangman game
+// hangman game 
 document.onkeyup = function(event) {
-
+	// record user key press
 	var userGuess = event.key;
-	
-	document.querySelector("#blankLinesId").innerHTML = blankLinesArray.join(" ");
-	if (remainingCorrectLetters > 0) {
-		debugger;
-	    // Update the game state with the userGuess
-
-	    for (var j = 0; j < hangmanMMAFightersArray[fighterNumber].length; j++) {
-    	debugger;
-		    if (hangmanMMAFightersArray[fighterNumber][j] === userGuess.toLowerCase()) {
-	            debugger;
-		        blankLinesArray[j] = userGuess;
-		        debugger;
-	            remainingCorrectLetters--;
-		        debugger;
-	       	}	 
-	    } 
-	    lettersGuessed.push(userGuess);
-	    debugger;
-	    document.querySelector("#lettersGuessedId").innerHTML = "<p>" + lettersGuessed + "</p>";
-	}
-	
-	wins++;
-	debugger;
-	document.querySelector("#winsId").innerHTML = "<p>" + wins + "</p>";
-	// resetFunc();
+	// func to ensure userGuess is part of alphabet, BUG, DOESN'T Work with shifts, tab, etc
+	if (isNaN(userGuess)) {
+		// when the remaining correct letters is positive, continue the game
+		if (remainingCorrectLetters > 0) {
+			// to reset resultWord due to bug
+			document.querySelector("#resultWord").innerHTML = "";
+			// letters guessed by user function	
+		    lettersGuessed.push(userGuess);
+		   	document.querySelector("#lettersGuessedId").innerHTML = lettersGuessed.join(" ");
+		   	// # of guesses remaining after a keypress
+		    guessesRemaining--;
+		    document.querySelector("#guessesRemainingId").innerHTML = "<p>" + guessesRemaining + "</p>";
+		    // loop for comparing userGuess and fighter array
+		    for (var j = 0; j < hangmanMMAFightersArray[fighterNumber].length; j++) {
+	    		// correct letter function
+			    if (hangmanMMAFightersArray[fighterNumber][j] === userGuess.toLowerCase()) {
+		            // blank lines are replaced by userGuess
+			        blankLinesArray[j] = userGuess;
+			        // blankLines update
+		   			document.querySelector("#blankLinesId").innerHTML = blankLinesArray.join(" ");	        
+			        remainingCorrectLetters--;
+			        // win
+		            if (remainingCorrectLetters == 0) {
+						wins++;
+						document.querySelector("#winsId").innerHTML = "<p>" + wins + "</p>";
+						document.querySelector("#resultWord").innerHTML = "<p>" + hangmanMMAFightersArrUpp[fighterNumber] + "</p>";
+						resetFunc();
+					} 
+		       	} 
+		       	// loss
+		       	else if (guessesRemaining <= 0) {
+					losses++;
+					document.querySelector("#lossesId").innerHTML = "<p>" + losses + "</p>";
+					resetFunc();
+			    } 
+		    } 
+		} 
+	} else {
+		document.querySelector("#NaNInputId").innerHTML = "Don't use non-letters";
+	}	
+}
+			
 		
-}		
 // var hangmanMMAFightersArrayLowerCase = hangmanMMAFightersArray.toLowerCase();								
 
 // func to reset game after loss or win
 function resetFunc() {
-	debugger;
-	// vars and innerHTML for incorrectGuessesRemaining
-	incorrectGuessesRemaining = 10;
-	document.querySelector("#incorrectGuessesRemainingId").innerHTML = "<p>" + incorrectGuessesRemaining + "</p>";
+	// vars and innerHTML for guessesRemaining
+	guessesRemaining = 15;
+	document.querySelector("#guessesRemainingId").innerHTML = "<p>" + guessesRemaining + "</p>";
 
 	// vars and innerHTML for letters guessed
-	var lettersGuessed = [""];
+	lettersGuessed = [];
 	document.querySelector("#lettersGuessedId").innerHTML = "<p>" + lettersGuessed + "</p>";
 	
 	// var, innerHTML, and func to determing # of blankLines based on fighterNumber
-	var fighterNumber = [Math.floor(Math.random() * hangmanMMAFightersArray.length)];
-	// blankLines = function blankLinesFunc() {
-	// 			// var and func for determing fighterNumber
-	// 			return "_ ".repeat(hangmanMMAFightersArray[0].length);
-	// 			};			
-	// function blankLinesVar = blankLines.charAt();			
-	// document.querySelector("#blankLinesId").innerHTML = "<p>" + blankLines() + "</p>";
+	fighterNumber = [Math.floor(Math.random() * hangmanMMAFightersArray.length)];
+
+	// reset remainingCorrectLetters
+	remainingCorrectLetters = hangmanMMAFightersArray[fighterNumber].length;
+
+	// reset blankArray
+	blankLinesArray = [];
+	for (i = 0; i < hangmanMMAFightersArray[fighterNumber].length; i++) {
+		blankLinesArray[i]="_";
+		document.querySelector("#blankLinesId").innerHTML = blankLinesArray.join(" ");
+	}
+	// reset userGuess so it isn't logged
+	userGuess = "";
 }
-
-// func is run whenever the user presses a key, used to match user input, incorrectGuessesRemaining, lettersGuessed
-// document.onkeyup = function(event) {
-
-//     // Determines which key was pressed.
-//     var userGuess = event.key;
-//     // func for matching user input with hangmanMMAFightersArray
-// 	for (i = 0; i < hangmanMMAFightersArray[0].length; i++) {
-		
-// 		if (userGuess.toLowerCase() == hangmanMMAFightersArray[0][i]) {
-// 			// hangmanMMAFightersArray[0][i];
-// 			// set a loop where every time userGuess == hangmanMMAFightersArray[fighter][i],
-// 			// input html for those positions in id="blankLines"
-// 			blankLinesVar(i) = userGuess;
-// 		}	
-// 	}   
-// 	// if userGuess is wrong, incorrectGuessesRemaining - 1 and input lettersGuessed as userGuess
-// 	incorrectGuessesRemaining--;
-// 	// document.querySelector(#lettersGuessedId).innerHTML = "<p>" + userGuess + "-</p";
-// };
-
-
-
-
-// else {
-//   	    	document.querySelector("#NaNInputId").innerHTML = ("Please type letters, not numbers/symbols"); 
-
-// if (isNaN(userGuess)) {  	    	
